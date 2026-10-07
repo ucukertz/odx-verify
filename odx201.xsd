@@ -1,0 +1,2889 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Version: 2.0.1-->
+<!--Generated: Tue Mar 29 11:19:34 CEST 2005-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="ACCESS-LEVEL">
+        <!--Class: ACCESS-LEVEL-->
+        <!-- This class handles the different security access rights of the different users. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="DESCRIPTION" name="DESC"/>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-SNREF" type="SNREF"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="EXTERNAL-ACCESS-METHOD" name="EXTERNAL-ACCESS-METHOD"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ACCESS-LEVELS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ACCESS-LEVEL" name="ACCESS-LEVEL"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ADDRDEF-FILTER">
+        <!--Class: ADDRDEF-FILTER-->
+        <!-- Definition of the Address of the Filter. -->
+        <xsd:complexContent>
+            <xsd:extension base="FILTER">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="FILTER-END"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ADDRDEF-PHYS-SEGMENT">
+        <!--Class: ADDRDEF-PHYS-SEGMENT-->
+        <!-- Address definition of the physical segment. -->
+        <xsd:complexContent>
+            <xsd:extension base="PHYS-SEGMENT">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="END-ADDRESS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="ADDRESSING">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FUNCTIONAL"/>
+            <xsd:enumeration value="PHYSICAL"/>
+            <xsd:enumeration value="FUNCTIONAL-OR-PHYSICAL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="ADMIN-DATA">
+        <!--Class: ADMIN-DATA-->
+        <!-- The ADMIN-DATA class contains information about administration of the specific data. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="LANGUAGE"/>
+            <xsd:element type="COMPANY-DOC-INFOS" name="COMPANY-DOC-INFOS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DOC-REVISIONS" name="DOC-REVISIONS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ALL-VALUE">
+        <!--Class: ALL-VALUE-->
+        <!-- In many cases a set of environment data is valid for all DTCs. To avoid duplicate specification of these common environmental data as PARAMs within all affected ENV-DATA objects, a separate ENV-DATA with a special flag ALL-VALUE is intended. -->
+    </xsd:complexType>
+    <xsd:complexType name="AUDIENCE">
+        <!--Class: AUDIENCE-->
+        <!-- One service can be released for several groups -->
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-SUPPLIER"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-DEVELOPMENT"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-MANUFACTURING"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-AFTERSALES"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-AFTERMARKET"/>
+    </xsd:complexType>
+    <xsd:complexType name="AUT-METHOD">
+        <!--Class: AUT-METHOD-->
+        <!-- The runtime system (and it's user) has to authorize itself using a Hardware like CANCardX , a dongle or a software Seed&Key including the users level. AUT-METHOD defines which kind of these collection are has to be used. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="AUT-METHODS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="AUT-METHOD" name="AUT-METHOD"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="BASE-VARIANT">
+        <!--Class: BASE-VARIANT-->
+        <!-- This is a wrapper class for all data of a Basis Variant. -->
+        <xsd:complexContent>
+            <xsd:extension base="HIERARCHY-ELEMENT">
+                <xsd:sequence>
+                    <xsd:element type="DIAG-VARIABLES" name="DIAG-VARIABLES" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="VARIABLE-GROUPS" name="VARIABLE-GROUPS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="AUT-METHODS" name="AUT-METHODS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="DYN-DEFINED-SPEC" name="DYN-DEFINED-SPEC"/>
+                    <xsd:element type="ACCESS-LEVELS" name="ACCESS-LEVELS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="PARENT-REFS" name="PARENT-REFS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BASE-VARIANT-REF">
+        <!--Class: BASE-VARIANT-REF-->
+        <!-- This is a reference to Base-Variant class. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARENT-REF"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BASE-VARIANTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="BASE-VARIANT" name="BASE-VARIANT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="BASIC-STRUCTURE">
+        <!--Class: BASIC-STRUCTURE-->
+        <!-- This is a base class for the two different structures (Structure, EnvData). -->
+        <xsd:complexContent>
+            <xsd:extension base="COMPLEX-DOP">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BYTE-SIZE"/>
+                    <xsd:element type="PARAMS" name="PARAMS" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CASE">
+        <!--Class: CASE-->
+        <!-- This class transforms the data within one interval of values of the Mux. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="STRUCTURE-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="LIMIT" name="LOWER-LIMIT"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="LIMIT" name="UPPER-LIMIT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CASES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="CASE" name="CASE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CHECKSUM">
+        <!--Class: CHECKSUM-->
+        <!-- This is one checksum entry. This checksum is used to perform checks during the process chain. The adressrange is specified by SOURCE-START-ADDR and SOURCE-END-ADDR (or UNCOMPRESSED-SIZE). -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:hexBinary" name="FILLBYTE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="SOURCE-START-ADDRESS"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="COMPRESSED-SIZE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="CHECKSUM-ALG"/>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" type="SOURCE-END-ADDRESS" name="SOURCE-END-ADDRESS"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="UNCOMPRESSED-SIZE" name="UNCOMPRESSED-SIZE"/>
+            </xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" type="CHECKSUM-RESULT" name="CHECKSUM-RESULT"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="CHECKSUM-RESULT">
+        <!--Class: CHECKSUM-RESULT-->
+        <!-- The expected result is in CHECKSUM-RESULT. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="SESSION-SUB-ELEM-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="CHECKSUMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="CHECKSUM" name="CHECKSUM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CODED-CONST">
+        <!--Class: CODED-CONST-->
+        <!-- CODED-CONST parameters are used in a request if the user must not change its value. Within a RESPONSE it will be used to match against an expected value. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="CODED-VALUE"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-CODED-TYPE" name="DIAG-CODED-TYPE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="COMM-RELATION">
+        <!--Class: COMM-RELATION-->
+        <!-- COMM-RELATION describes the type of relation between DIAG-VARIABLES and DIAG-COMMS. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="RELATION-TYPE"/>
+            <xsd:choice maxOccurs="1" minOccurs="1">
+                <xsd:element name="DIAG-COMM-REF" type="ODXLINK"/>
+                <xsd:element name="DIAG-COMM-SNREF" type="SNREF"/>
+            </xsd:choice>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="0" name="IN-PARAM-IF-SNREF" type="SNREF"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="OUT-PARAM-IF-SNREF" type="SNREF"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="COMM-RELATION-VALUE-TYPE" name="VALUE-TYPE"/>
+    </xsd:complexType>
+    <xsd:complexType name="COMM-RELATIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMM-RELATION" name="COMM-RELATION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="COMM-RELATION-VALUE-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CURRENT"/>
+            <xsd:enumeration value="STORED"/>
+            <xsd:enumeration value="STATIC"/>
+            <xsd:enumeration value="SUBSTITUTED"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="COMPANY-DATA">
+        <!--Class: COMPANY-DATA-->
+        <!-- This class wraps all data of a company that is involved as a process partner in the creation or modification of ODX objects. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="ROLES" name="ROLES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="TEAM-MEMBERS" name="TEAM-MEMBERS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="COMPANY-SPECIFIC-INFO" name="COMPANY-SPECIFIC-INFO"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-DATAS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPANY-DATA" name="COMPANY-DATA"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-DOC-INFO">
+        <!--Class: COMPANY-DOC-INFO-->
+        <!-- The COMPANY-DOC-INFO objects contain company-specific information about the object the ADMIN-DATA belongs to. They are mainly used for documentation purposes. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="COMPANY-DATA-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TEAM-MEMBER-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="DOC-LABEL"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-DOC-INFOS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPANY-DOC-INFO" name="COMPANY-DOC-INFO"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-REVISION-INFO">
+        <!--Class: COMPANY-REVISION-INFO-->
+        <!-- Company-specific revision information can be stored in COMPANY-REVISION-INFO objects. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="COMPANY-DATA-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="REVISION-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="STATE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-REVISION-INFOS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPANY-REVISION-INFO" name="COMPANY-REVISION-INFO"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPANY-SPECIFIC-INFO">
+        <!--Class: COMPANY-SPECIFIC-INFO-->
+        <!-- This class represents company spezific information.Information that is not associated with a single person may be stored also in the COMPANY-SPECIFIC-INFO object. -->
+        <xsd:sequence>
+            <xsd:element type="RELATED-DOCS" name="RELATED-DOCS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPARAM">
+        <!--Class: COMPARAM-->
+        <!-- The class COMPARAM has attributes to describe semantic information which are necessary for the runtime system. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="PHYSICAL-DEFAULT-VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DATA-OBJECT-PROP-REF" type="ODXLINK"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="required" type="xsd:string" name="PARAM-CLASS"/>
+        <xsd:attribute use="required" type="STANDARDISATION-LEVEL" name="CPTYPE"/>
+        <xsd:attribute use="required" type="xsd:unsignedInt" name="DISPLAY-LEVEL"/>
+        <xsd:attribute use="optional" type="xsd:unsignedInt" name="PDU-API-INDEX"/>
+    </xsd:complexType>
+    <xsd:complexType name="COMPARAM-REF">
+        <!--Class: COMPARAM-REF-->
+        <!-- Reference to a COMPARAM -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PROTOCOL-SNREF" type="SNREF"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="COMPARAM-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPARAM-REF" name="COMPARAM-REF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPARAMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPARAM" name="COMPARAM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPARAM-SPEC">
+        <!--Class: COMPARAM-SPEC-->
+        <!-- The set of comparams is defined in a part of the XML data model named COMPARAM-SPEC. -->
+        <xsd:complexContent>
+            <xsd:extension base="ODX-CATEGORY">
+                <xsd:sequence>
+                    <xsd:element type="COMPARAMS" name="COMPARAMS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="DATA-OBJECT-PROPS" name="DATA-OBJECT-PROPS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="UNIT-SPEC" name="UNIT-SPEC"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="COMPLEX-DOP">
+        <!--Class: COMPLEX-DOP-->
+        <!-- Complex-DOP are Dynamic-Length-Fields, Dynamic-Endmarker-Fields, MUXs or Structures. -->
+        <xsd:complexContent>
+            <xsd:extension base="DOP-BASE"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="COMPU-CATEGORY">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="IDENTICAL"/>
+            <xsd:enumeration value="LINEAR"/>
+            <xsd:enumeration value="SCALE-LINEAR"/>
+            <xsd:enumeration value="TEXTTABLE"/>
+            <xsd:enumeration value="COMPUCODE"/>
+            <xsd:enumeration value="TAB-INTP"/>
+            <xsd:enumeration value="RAT-FUNC"/>
+            <xsd:enumeration value="SCALE-RAT-FUNC"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="COMPU-CONST">
+        <!--Class: COMPU-CONST-->
+        <!-- COMPU-CONST defines the result for an interval -->
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" type="V" name="V"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="VT" name="VT"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-DEFAULT-VALUE">
+        <!--Class: COMPU-DEFAULT-VALUE-->
+        <!-- The element COMPU-DEFAULT-VALUE can be used to define the physical value if the internal value does not lie in any given interval. -->
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" type="V" name="V"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="VT" name="VT"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-DENOMINATOR">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="V" name="V"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-INTERNAL-TO-PHYS">
+        <!--Class: COMPU-INTERNAL-TO-PHYS-->
+        <!-- To transform an internal value into its physical representation the element COMPU-INTERNAL-TO-PHYS is used. -->
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element type="COMPU-SCALES" name="COMPU-SCALES" minOccurs="1" maxOccurs="1"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="PROG-CODE" name="PROG-CODE"/>
+            </xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="0" type="COMPU-DEFAULT-VALUE" name="COMPU-DEFAULT-VALUE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-INVERSE-VALUE">
+        <!--Class: COMPU-INVERSE-VALUE-->
+        <!-- The element COMPU-INVERSE-VALUE is provided in order to resolve the occurrence of possible ambiguities. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="V" name="V"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-METHOD">
+        <!--Class: COMPU-METHOD-->
+        <!-- The COMPU-METHOD is used to describe the whole transformation of an internal value into its physical representation and the reverse calculation. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="COMPU-CATEGORY" name="CATEGORY"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="COMPU-INTERNAL-TO-PHYS" name="COMPU-INTERNAL-TO-PHYS"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="COMPU-PHYS-TO-INTERNAL" name="COMPU-PHYS-TO-INTERNAL"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-NUMERATOR">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="V" name="V"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-PHYS-TO-INTERNAL">
+        <!--Class: COMPU-PHYS-TO-INTERNAL-->
+        <!-- The element COMPU-PHYS-TO-INTERNAL is responsible for the calculation of the physical value into its internal value. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="PROG-CODE" name="PROG-CODE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-RATIONAL-COEFFS">
+        <!--Class: COMPU-RATIONAL-COEFFS-->
+        <!-- This class is a wrapper class for the coeffizients of the numeric CompuMethods. It wrapps the numerators and denumeratorns. -->
+        <xsd:sequence>
+            <xsd:element type="COMPU-NUMERATOR" name="COMPU-NUMERATOR" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="COMPU-DENOMINATOR" name="COMPU-DENOMINATOR" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-SCALE">
+        <!--Class: COMPU-SCALE-->
+        <!-- Description of a single gradient formula that is valid within an interval of values. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="TEXT" name="SHORT-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="LIMIT" name="LOWER-LIMIT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="LIMIT" name="UPPER-LIMIT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="COMPU-INVERSE-VALUE" name="COMPU-INVERSE-VALUE"/>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" type="COMPU-CONST" name="COMPU-CONST"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="COMPU-RATIONAL-COEFFS" name="COMPU-RATIONAL-COEFFS"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="COMPU-SCALES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="COMPU-SCALE" name="COMPU-SCALE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DATABLOCK">
+        <!--Class: DATABLOCK-->
+        <!-- DATABLOCK describes the logical structure of FLASHDATA, which is referenced by FLASHDATA-REF. The DATABLOCK can describe e.g. a whole code section, a single like one calibration value. 
+ -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="FLASHDATA-REF" type="ODXLINK"/>
+            <xsd:element type="FILTERS" name="FILTERS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SEGMENTS" name="SEGMENTS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="TARGET-ADDR-OFFSET" name="TARGET-ADDR-OFFSET"/>
+            <xsd:element type="OWN-IDENTS" name="OWN-IDENTS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SECURITYS" name="SECURITYS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="required" type="xsd:string" name="TYPE"/>
+    </xsd:complexType>
+    <xsd:complexType name="DATABLOCK-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="DATABLOCK-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DATABLOCKS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DATABLOCK" name="DATABLOCK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DATAFILE">
+        <!--Class: DATAFILE-->
+        <!-- Data from external datafile. One file might contain data for more than one DATABLOCK. In the case of LATEBINDED-DATAFILE==TRUE at DATAFILE: The diagnostic application must determine the filename and pass it to the flash job. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="xsd:boolean" name="LATEBOUND-DATAFILE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="DATAFORMAT">
+        <!--Class: DATAFORMAT-->
+        <!-- The required DATAFORMAT contains the name of the format in which data is represented in the current DATA or DATAFILE-REF element. The possible values are MOTOROLA-S, INTEL-HEX or BINARY. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="DATAFORMAT-SELECTION" name="SELECTION"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="DATAFORMAT-SELECTION">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INTEL-HEX"/>
+            <xsd:enumeration value="MOTOROLA-S"/>
+            <xsd:enumeration value="BINARY"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="DATA-OBJECT-PROP">
+        <!--Class: DATA-OBJECT-PROP-->
+        <!-- A simple DOP represented by class DATA-OBJECT-PROP describes how to extract a single data item from the byte stream and to transform the extracted (internal) value into its physical representation using a computational method (COMPU-METHOD). After the conversion a UNIT-REF can be used to reference a UNIT in order to provide additional visualization information for the value. The reverse calculation - i.e. the conversion of the physical value into an internal one and its coding into the byte stream - is also possible with some types of simple DOPs (depending on the used computational method) -->
+        <xsd:complexContent>
+            <xsd:extension base="DOP-BASE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="COMPU-METHOD" name="COMPU-METHOD"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-CODED-TYPE" name="DIAG-CODED-TYPE"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="PHYSICAL-TYPE" name="PHYSICAL-TYPE"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="INTERNAL-CONSTR" name="INTERNAL-CONSTR"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="UNIT-REF" type="ODXLINK"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DATA-OBJECT-PROPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DATA-OBJECT-PROP" name="DATA-OBJECT-PROP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DATA-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A_INT32"/>
+            <xsd:enumeration value="A_UINT32"/>
+            <xsd:enumeration value="A_FLOAT32"/>
+            <xsd:enumeration value="A_FLOAT64"/>
+            <xsd:enumeration value="A_ASCIISTRING"/>
+            <xsd:enumeration value="A_UTF8STRING"/>
+            <xsd:enumeration value="A_UNICODE2STRING"/>
+            <xsd:enumeration value="A_BYTEFIELD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="DEFAULT-CASE">
+        <!--Class: DEFAULT-CASE-->
+        <!-- Default transformation of data of the class Mux; this transformation is used whenever no other case is matching. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="STRUCTURE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DESCRIPTION">
+        <!--Class: DESCRIPTION-->
+        <!-- This class gives the possibility to describe the object. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" type="p" name="p"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="TI"/>
+    </xsd:complexType>
+    <xsd:complexType name="DETERMINE-NUMBER-OF-ITEMS">
+        <!--Class: DETERMINE-NUMBER-OF-ITEMS-->
+        <!-- Allows to define the number of field elements of DYNAMIC-LENGTH-FIELD dynamically via a reference to DataObjectProperty (DOP); data type of the physical value must be a unsigned numeric one (UNUM8/ UNUM16/ UNUM32/ UNUM64) -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BYTE-POSITION"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BIT-POSITION"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DATA-OBJECT-PROP-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DIAG-CLASS-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="STARTCOMM"/>
+            <xsd:enumeration value="STOPCOMM"/>
+            <xsd:enumeration value="VARIANTIDENTIFICATION"/>
+            <xsd:enumeration value="READ-DYN-DEFINED-MESSAGE"/>
+            <xsd:enumeration value="DYN-DEF-MESSAGE"/>
+            <xsd:enumeration value="CLEAR-DYN-DEF-MESSAGE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="DIAG-CODED-TYPE">
+        <!--Class: DIAG-CODED-TYPE-->
+        <!-- DIAG-CODED-TYPE is responsible for extraction of the coded value out of the byte stream and for packing of a value into the stream. -->
+        <xsd:attribute use="optional" type="ENCODING" name="BASE-TYPE-ENCODING"/>
+        <xsd:attribute use="required" type="DATA-TYPE" name="BASE-DATA-TYPE"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-HIGHLOW-BYTE-ORDER"/>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-COMM">
+        <!--Class: DIAG-COMM-->
+        <!-- DIAG-COMM is a base class of DIAG-SERVICE and DIAG-JOB. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="COMPARAM-REFS" name="COMPARAM-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="FUNCT-CLASS-REFS" name="FUNCT-CLASS-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="AUDIENCE" name="AUDIENCE"/>
+            <xsd:element type="PROTOCOL-SNREFS" name="PROTOCOL-SNREFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="RELATED-DIAG-COMM-REFS" name="RELATED-DIAG-COMM-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+        <xsd:attribute use="optional" type="DIAG-CLASS-TYPE" name="DIAGNOSTIC-CLASS"/>
+        <xsd:attribute use="optional" type="xsd:unsignedInt" name="SECURITY-ACCESS-LEVEL"/>
+        <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-MANDATORY"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-EXECUTABLE"/>
+        <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-FINAL"/>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-COMMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:group maxOccurs="unbounded" minOccurs="1" ref="DIAG-COMM-PROXY"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-DATA-DICTIONARY-SPEC">
+        <!--Class: DIAG-DATA-DICTIONARY-SPEC-->
+        <!-- Wrapper class for UNIT-SPEC, VARIABLE_GROUP, DIAG_VARIABLES and DOP. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="DTC-DOPS" name="DTC-DOPS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="ENV-DATA-DESCS" name="ENV-DATA-DESCS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DATA-OBJECT-PROPS" name="DATA-OBJECT-PROPS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="STRUCTURES" name="STRUCTURES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="STATIC-FIELDS" name="STATIC-FIELDS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DYNAMIC-LENGTH-FIELDS" name="DYNAMIC-LENGTH-FIELDS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DYNAMIC-ENDMARKER-FIELDS" name="DYNAMIC-ENDMARKER-FIELDS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="END-OF-PDU-FIELDS" name="END-OF-PDU-FIELDS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="MUXS" name="MUXS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="ENV-DATAS" name="ENV-DATAS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="UNIT-SPEC" name="UNIT-SPEC"/>
+            <xsd:element type="TABLES" name="TABLES" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-LAYER">
+        <!--Class: DIAG-LAYER-->
+        <!-- A Diag-Layer is an instance of a diagnostic layer , a FUNCTIONAL-GROUP, a BASE-VARIANT, an ECU-VARIANT, or an ECU-SHARED-DATA. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="COMPANY-DATAS" name="COMPANY-DATAS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="FUNCT-CLASSS" name="FUNCT-CLASSS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DIAG-DATA-DICTIONARY-SPEC" name="DIAG-DATA-DICTIONARY-SPEC"/>
+            <xsd:element type="DIAG-COMMS" name="DIAG-COMMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="REQUESTS" name="REQUESTS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="POS-RESPONSES" name="POS-RESPONSES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="NEG-RESPONSES" name="NEG-RESPONSES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="GLOBAL-NEG-RESPONSES" name="GLOBAL-NEG-RESPONSES" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-LAYER-CONTAINER">
+        <!--Class: DIAG-LAYER-CONTAINER-->
+        <!-- A DIAG-LAYER-CONTAINER may contain one or more Diag-Layers and additional process-specific information like ADMIN-DATA and COMPANY-DATA. -->
+        <xsd:complexContent>
+            <xsd:extension base="ODX-CATEGORY">
+                <xsd:sequence>
+                    <xsd:element type="PROTOCOLS" name="PROTOCOLS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="FUNCTIONAL-GROUPS" name="FUNCTIONAL-GROUPS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="ECU-SHARED-DATAS" name="ECU-SHARED-DATAS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="BASE-VARIANTS" name="BASE-VARIANTS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="ECU-VARIANTS" name="ECU-VARIANTS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-LAYER-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="DIAG-LAYER-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-SERVICE">
+        <!--Class: DIAG-SERVICE-->
+        <!-- Access element to diagnostic data via an MCD-3D / MVCI server interface. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-COMM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="REQUEST-REF" type="ODXLINK"/>
+                    <xsd:element type="POS-RESPONSE-REFS" name="POS-RESPONSE-REFS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="NEG-RESPONSE-REFS" name="NEG-RESPONSE-REFS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-CYCLIC"/>
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-MULTIPLE"/>
+                <xsd:attribute default="PHYSICAL" use="optional" type="ADDRESSING" name="ADDRESSING"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-VARIABLE">
+        <!--Class: DIAG-VARIABLE-->
+        <!-- DIAG-VARIABLES are the instances of diagnostic objects that are handled via diagnostic services. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="VARIABLE-GROUP-REF" type="ODXLINK"/>
+            <xsd:element type="SW-VARIABLES" name="SW-VARIABLES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="COMM-RELATIONS" name="COMM-RELATIONS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-READ-BEFORE-WRITE"/>
+    </xsd:complexType>
+    <xsd:complexType name="DIAG-VARIABLES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:group maxOccurs="unbounded" minOccurs="1" ref="DIAG-VARIABLE-PROXY"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DIRECTION">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DOWNLOAD"/>
+            <xsd:enumeration value="UPLOAD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="DOC-REVISION">
+        <!--Class: DOC-REVISION-->
+        <!-- Each DOC-REVISION object describes one revision of the object the ADMIN-DATA belongs to. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TEAM-MEMBER-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="REVISION-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="STATE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:dateTime" name="DATE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="TOOL"/>
+            <xsd:element type="COMPANY-REVISION-INFOS" name="COMPANY-REVISION-INFOS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="MODIFICATIONS" name="MODIFICATIONS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DOC-REVISIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DOC-REVISION" name="DOC-REVISION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="DOCTYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FLASH"/>
+            <xsd:enumeration value="CONTAINER"/>
+            <xsd:enumeration value="LAYER"/>
+            <xsd:enumeration value="MULTIPLE-ECU-JOB-SPEC"/>
+            <xsd:enumeration value="COMPARAM-SPEC"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="DOP-BASE">
+        <!--Class: DOP-BASE-->
+        <!-- DOP-BASE is the common base class of all simple, complex and DTC-DOPs. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="DTC">
+        <!--Class: DTC-->
+        <!-- Represents the definition of one diagnostic trouble code. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="SHORT-NAME"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:int" name="TROUBLE-CODE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="DISPLAY-TROUBLE-CODE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="TEXT" name="TEXT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedByte" name="LEVEL"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="DTC-DOP">
+        <!--Class: DTC-DOP-->
+        <!-- The DTC-DOP class handles the conversion of diagnostic trouble codes into text. It is a special class, which combines a mux an structures. -->
+        <xsd:complexContent>
+            <xsd:extension base="DOP-BASE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-CODED-TYPE" name="DIAG-CODED-TYPE"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="PHYSICAL-TYPE" name="PHYSICAL-TYPE"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="COMPU-METHOD" name="COMPU-METHOD"/>
+                    <xsd:element type="DTCS" name="DTCS" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-VISIBLE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DTC-DOPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DTC-DOP" name="DTC-DOP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DTCS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:group maxOccurs="unbounded" minOccurs="1" ref="DTC-PROXY"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DTC-VALUE">
+        <!--Class: DTC-VALUE-->
+        <!-- An ENV-DATA object is selected for interpretation of environment data if one of its DTC-VALUEs matches the current value of the switch-key. More than one DTC-VALUE may be given for one ENV-DATA if the corresponding DTCs have the same structure of environment data. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:int"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="DTC-VALUES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DTC-VALUE" name="DTC-VALUE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DYNAMIC">
+        <!--Class: DYNAMIC-->
+        <!-- A DYNAMIC parameter is used in this case to indicate the runtime system that the parameter was defined dynamically. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DYNAMIC-ENDMARKER-FIELD">
+        <!--Class: DYNAMIC-ENDMARKER-FIELD-->
+        <!-- Repetition of structures with a variable number of repetitions. The repetitions ends by reaching a termination value, which is computed via a DOP. -->
+        <xsd:complexContent>
+            <xsd:extension base="FIELD">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DYN-END-DOP-REF" name="DATA-OBJECT-PROP-REF"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DYNAMIC-ENDMARKER-FIELDS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DYNAMIC-ENDMARKER-FIELD" name="DYNAMIC-ENDMARKER-FIELD"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DYNAMIC-LENGTH-FIELD">
+        <!--Class: DYNAMIC-LENGTH-FIELD-->
+        <!-- Repetition of structures with a variable number of repetitions. The number of repetitions is given dynamically by a value computed via a DOP. -->
+        <xsd:complexContent>
+            <xsd:extension base="FIELD">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="OFFSET"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DETERMINE-NUMBER-OF-ITEMS" name="DETERMINE-NUMBER-OF-ITEMS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DYNAMIC-LENGTH-FIELDS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DYNAMIC-LENGTH-FIELD" name="DYNAMIC-LENGTH-FIELD"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DYN-DEFINED-SPEC">
+        <!--Class: DYN-DEFINED-SPEC-->
+        <!-- The object DYN-DEFINED-SPEC lists all supported dynamical defined local identifiers of the ECU -->
+        <xsd:sequence>
+            <xsd:element type="DYN-ID-DEF-MODE-INFOS" name="DYN-ID-DEF-MODE-INFOS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DYN-END-DOP-REF">
+        <!--Association Class: DYN-END-DOP-REF-->
+        <!--  -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="TERMINATION-VALUE"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="DYN-ID-DEF-MODE-INFO">
+        <!--Class: DYN-ID-DEF-MODE-INFO-->
+        <!--  -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="DEF-MODE"/>
+            <xsd:choice maxOccurs="1" minOccurs="1">
+                <xsd:element name="CLEAR-DYN-DEF-MESSAGE-REF" type="ODXLINK"/>
+                <xsd:element name="CLEAR-DYN-DEF-MESSAGE-SNREF" type="SNREF"/>
+            </xsd:choice>
+            <xsd:choice maxOccurs="1" minOccurs="1">
+                <xsd:element name="READ-DYN-DEF-MESSAGE-REF" type="ODXLINK"/>
+                <xsd:element name="READ-DYN-DEF-MESSAGE-SNREF" type="SNREF"/>
+            </xsd:choice>
+            <xsd:choice maxOccurs="1" minOccurs="1">
+                <xsd:element name="DYN-DEF-MESSAGE-REF" type="ODXLINK"/>
+                <xsd:element name="DYN-DEF-MESSAGE-SNREF" type="SNREF"/>
+            </xsd:choice>
+            <xsd:element type="SUPPORTED-DYN-IDS" name="SUPPORTED-DYN-IDS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SELECTION-TABLE-REFS" name="SELECTION-TABLE-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DYN-ID-DEF-MODE-INFOS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="DYN-ID-DEF-MODE-INFO" name="DYN-ID-DEF-MODE-INFO"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-GROUP">
+        <!--Class: ECU-GROUP-->
+        <!-- The size in bytes of the ENV-DATA-DESC. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="LOGICAL-LINK-REFS" name="LOGICAL-LINK-REFS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-GROUPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-GROUP" name="ECU-GROUP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-MEM">
+        <!--Class: ECU-MEM-->
+        <!-- Container for flash data transfer between development, factory and customer -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="PROJECT-INFOS" name="PROJECT-INFOS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="MEM" name="MEM"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="PHYS-MEM" name="PHYS-MEM"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-MEM-CONNECTOR">
+        <!--Class: ECU-MEM-CONNECTOR-->
+        <!-- The ECU-MEM-CONNECTOR is connecting the Flash description with the Flash servie description. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="FLASH-CLASSS" name="FLASH-CLASSS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SESSION-DESCS" name="SESSION-DESCS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="IDENT-DESCS" name="IDENT-DESCS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ECU-MEM-REF" type="ODXLINK"/>
+            <xsd:element type="LAYER-REFS" name="LAYER-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-MEM-CONNECTORS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-MEM-CONNECTOR" name="ECU-MEM-CONNECTOR"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-MEMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-MEM" name="ECU-MEM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-PROXY">
+        <!--Class: ECU-PROXY-->
+        <!-- A special kind of INFO-COMPONENT is the socalled ECU-PROXY. It is used to establish an alternative description for a family of built-in ECUs for external presentation. -->
+        <xsd:complexContent>
+            <xsd:extension base="INFO-COMPONENT"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-PROXY-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="ECU-PROXY-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-SHARED-DATA">
+        <!--Class: ECU-SHARED-DATA-->
+        <!-- This is a wrapper class for all data of a ECU-SHARED-DATA. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-LAYER">
+                <xsd:sequence>
+                    <xsd:element type="DIAG-VARIABLES" name="DIAG-VARIABLES" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="VARIABLE-GROUPS" name="VARIABLE-GROUPS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-SHARED-DATA-REF">
+        <!--Class: ECU-SHARED-DATA-REF-->
+        <!-- This is a reference to ECU-SHARED-DATA class. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARENT-REF"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-SHARED-DATAS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-SHARED-DATA" name="ECU-SHARED-DATA"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-VARIANT">
+        <!--Class: ECU-VARIANT-->
+        <!-- This is a wrapper class for all data of a ECU Variant. -->
+        <xsd:complexContent>
+            <xsd:extension base="HIERARCHY-ELEMENT">
+                <xsd:sequence>
+                    <xsd:element type="DIAG-VARIABLES" name="DIAG-VARIABLES" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="VARIABLE-GROUPS" name="VARIABLE-GROUPS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="ECU-VARIANT-PATTERNS" name="ECU-VARIANT-PATTERNS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="AUT-METHODS" name="AUT-METHODS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="DYN-DEFINED-SPEC" name="DYN-DEFINED-SPEC"/>
+                    <xsd:element type="ACCESS-LEVELS" name="ACCESS-LEVELS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="PARENT-REFS" name="PARENT-REFS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-VARIANT-PATTERN">
+        <!--Class: ECU-VARIANT-PATTERN-->
+        <!-- Pattern of the ECU-VARIANT. -->
+        <xsd:sequence>
+            <xsd:element type="MATCHING-PARAMETERS" name="MATCHING-PARAMETERS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-VARIANT-PATTERNS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-VARIANT-PATTERN" name="ECU-VARIANT-PATTERN"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ECU-VARIANTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ECU-VARIANT" name="ECU-VARIANT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="ENCODING">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BCD-P"/>
+            <xsd:enumeration value="BCD-UP"/>
+            <xsd:enumeration value="1C"/>
+            <xsd:enumeration value="2C"/>
+            <xsd:enumeration value="SM"/>
+            <xsd:enumeration value="UTF-8"/>
+            <xsd:enumeration value="UCS-2"/>
+            <xsd:enumeration value="ISO-8859-1"/>
+            <xsd:enumeration value="ISO-8859-2"/>
+            <xsd:enumeration value="WINDOWS-1252"/>
+            <xsd:enumeration value="NONE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="ENCRYPT-COMPRESS-METHOD">
+        <!--Class: ENCRYPT-COMPRESS-METHOD-->
+        <!-- This value describes the byte "Data Format Identifier" in KW2000, SID=$34. In other protocols this value may be obsolete or could have a other size. Therefore, this is optional and the size must be specified by attribute TYPE. The attribut TYPE: It describes the size of the value:
+ -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="ENCRYPT-COMPRESS-METHOD-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="ENCRYPT-COMPRESS-METHOD-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A_UINT32"/>
+            <xsd:enumeration value="A_BYTEFIELD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="END-OF-PDU-FIELD">
+        <!--Class: END-OF-PDU-FIELD-->
+        <!-- Repetition of structures with a variable number of repetitions. The number of repetitions is given dynamically by a termination value computed via a DOP or by the end of the PDU -->
+        <xsd:complexContent>
+            <xsd:extension base="FIELD">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="MAX-NUMBER-OF-ITEMS"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="MIN-NUMBER-OF-ITEMS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="END-OF-PDU-FIELDS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="END-OF-PDU-FIELD" name="END-OF-PDU-FIELD"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ENV-DATA">
+        <!--Class: ENV-DATA-->
+        <!-- An ENV-DATA object is selected for interpretation of environment data if one of its DTC-VALUEs matches the current value of the switch-key. -->
+        <xsd:complexContent>
+            <xsd:extension base="BASIC-STRUCTURE">
+                <xsd:choice>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="ALL-VALUE" name="ALL-VALUE"/>
+                    <xsd:element type="DTC-VALUES" name="DTC-VALUES" minOccurs="0" maxOccurs="1"/>
+                </xsd:choice>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ENV-DATA-DESC">
+        <!--Class: ENV-DATA-DESC-->
+        <!-- ENV-DATA-DESC is a complex DOP that is used to define the interpretation of environment data. -->
+        <xsd:complexContent>
+            <xsd:extension base="COMPLEX-DOP">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="PARAM-SNREF" type="SNREF"/>
+                    <xsd:element type="ENV-DATAS" name="ENV-DATAS" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ENV-DATA-DESCS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="ENV-DATA-DESC" name="ENV-DATA-DESC"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ENV-DATAS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:group maxOccurs="unbounded" minOccurs="1" ref="ENV-DATA-PROXY"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EXPECTED-IDENT">
+        <!--Class: EXPECTED-IDENT-->
+        <!-- identification of valid ancestor ECU. This contains all information about identification of ECUs being compatible to the current container. This means that the current container can be programmed into an ECU if all EXPECTED-IDENT elements match. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="IDENT-VALUES" name="IDENT-VALUES" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="EXPECTED-IDENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="EXPECTED-IDENT" name="EXPECTED-IDENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="EXTERNAL-ACCESS-METHOD">
+        <!--Class: EXTERNAL-ACCESS-METHOD-->
+        <!-- Using the EXTERNAL-ACCESS-METHOD you could define the way to access special data like production parameters. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EXTERN-FLASHDATA">
+        <!--Class: EXTERN-FLASHDATA-->
+        <!-- Discribes the posibility to store the Flashdata into a seperate file. -->
+        <xsd:complexContent>
+            <xsd:extension base="FLASHDATA">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="DATAFILE" name="DATAFILE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FIELD">
+        <!--Class: FIELD-->
+        <!-- Base class of all Complex-DOPs, which represents an static ore dynamic array of data. -->
+        <xsd:complexContent>
+            <xsd:extension base="COMPLEX-DOP">
+                <xsd:choice>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="BASIC-STRUCTURE-REF" type="ODXLINK"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ENV-DATA-DESC-REF" type="ODXLINK"/>
+                </xsd:choice>
+                <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-VISIBLE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FILTER">
+        <!--Class: FILTER-->
+        <!-- defines
+1) the address range in the case of hex formatted data
+2) the file offset in the case of (unformatted) binary data (0 = start of file)
+The range is specified either by start and end addresses or by start address and size (length) of range in bytes. Address ranges of two filters may not overlap.
+ -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="FILTER-START"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FILTERS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="FILTER" name="FILTER"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FLASH">
+        <!--Class: FLASH-->
+        <!-- Wrapper class for the ODX-Flash-Files -->
+        <xsd:complexContent>
+            <xsd:extension base="ODX-CATEGORY">
+                <xsd:sequence>
+                    <xsd:element type="ECU-MEMS" name="ECU-MEMS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="ECU-MEM-CONNECTORS" name="ECU-MEM-CONNECTORS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FLASH-CLASS">
+        <!--Class: FLASH-CLASS-->
+        <!-- FLASH-CLASSes can be used to group sessions according to certain criteria. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="FLASH-CLASS-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="FLASH-CLASS-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FLASH-CLASSS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="FLASH-CLASS" name="FLASH-CLASS"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FLASHDATA">
+        <!--Class: FLASHDATA-->
+        <!-- contains the the flash data or the file name of the flash data. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="DATAFORMAT" name="DATAFORMAT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ENCRYPT-COMPRESS-METHOD" name="ENCRYPT-COMPRESS-METHOD"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="FLASHDATAS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="FLASHDATA" name="FLASHDATA"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCT-CLASS">
+        <!--Class: FUNCT-CLASS-->
+        <!-- Allows organization of an database regarding to the authors demands by entering classes of Diagnostic Services on a functional level. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCT-CLASS-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="FUNCT-CLASS-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCT-CLASSS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="FUNCT-CLASS" name="FUNCT-CLASS"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCTIONAL-GROUP">
+        <!--Class: FUNCTIONAL-GROUP-->
+        <!-- This is a wrapper class for all data of a Functional Group. -->
+        <xsd:complexContent>
+            <xsd:extension base="HIERARCHY-ELEMENT">
+                <xsd:sequence>
+                    <xsd:element type="DIAG-VARIABLES" name="DIAG-VARIABLES" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="VARIABLE-GROUPS" name="VARIABLE-GROUPS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="ACCESS-LEVELS" name="ACCESS-LEVELS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="AUT-METHODS" name="AUT-METHODS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="PARENT-REFS" name="PARENT-REFS"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCTIONAL-GROUP-REF">
+        <!--Class: FUNCTIONAL-GROUP-REF-->
+        <!-- This is a reference to Functional-Group class. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARENT-REF"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FUNCTIONAL-GROUPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="FUNCTIONAL-GROUP" name="FUNCTIONAL-GROUP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FW-CHECKSUM">
+        <!--Class: FW-CHECKSUM-->
+        <!-- FW-CHECKSUM holds the checksum (e.g. a CRC32), which has to be sent to the target device for verification of integrity. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="SESSION-SUB-ELEM-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="FW-SIGNATURE">
+        <!--Class: FW-SIGNATURE-->
+        <!-- FW-SIGNATURE holds the signature, which has to be sent to the target device for verification of authenticity. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="SESSION-SUB-ELEM-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="GATEWAY-LOGICAL-LINK">
+        <!--Class: GATEWAY-LOGICAL-LINK-->
+        <!-- Every logical link may reference other logical links (GATEWAY-LOGICAL-LINK). The referenced target identifies a gateway through which the ECU represented by the reference source can be accessed. By letting a GATEWAY-LOGICAL-LINK reference another GATEWAY-LOGICAL-LINK, a hierarchy of gateways can be specified. -->
+        <xsd:complexContent>
+            <xsd:extension base="LOGICAL-LINK">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="SEMANTIC"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="GATEWAY-LOGICAL-LINK-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="GATEWAY-LOGICAL-LINK-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GLOBAL-NEG-RESPONSE">
+        <!--Class: GLOBAL-NEG-RESPONSE-->
+        <!-- Global negative response sent by an ECU, usually after a runtime system Request. -->
+        <xsd:complexContent>
+            <xsd:extension base="RESPONSE"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="GLOBAL-NEG-RESPONSES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="GLOBAL-NEG-RESPONSE" name="GLOBAL-NEG-RESPONSE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="HIERARCHY-ELEMENT">
+        <!--Class: HIERARCHY-ELEMENT-->
+        <!-- Wrapper class for all DIAG-LAYER classes. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-LAYER">
+                <xsd:sequence>
+                    <xsd:element type="COMPARAM-REFS" name="COMPARAM-REFS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="IMPORT-REFS" name="IMPORT-REFS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="IDENT-DESC">
+        <!--Class: IDENT-DESC-->
+        <!-- Description of the Ident. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-SNREF" type="SNREF"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="IDENT-IF-SNREF" type="SNREF"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="OUT-PARAM-IF-SNREF" type="SNREF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="IDENT-DESCS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="IDENT-DESC" name="IDENT-DESC"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="IDENT-VALUE">
+        <!--Class: IDENT-VALUE-->
+        <!-- This specifies the response from the ECU to denote the ECU identification. The flash job has to know, which services are needed to get the ID from ECU.  -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="IDENT-VALUE-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="IDENT-VALUES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="IDENT-VALUE" name="IDENT-VALUE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="IDENT-VALUE-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A_UINT32"/>
+            <xsd:enumeration value="A_BYTEFIELD"/>
+            <xsd:enumeration value="A_ASCIISTRING"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="IMPORT-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="IMPORT-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="INFO-COMPONENT">
+        <!--Class: INFO-COMPONENT-->
+        <!-- An INFO-COMPONENT describes one aspect of a vehicle that narrows down the set of possible vehicle topologies (VEHICLEINFORMATION). -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="MATCHING-COMPONENTS" name="MATCHING-COMPONENTS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="INFO-COMPONENT-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="INFO-COMPONENT-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="INFO-COMPONENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="INFO-COMPONENT" name="INFO-COMPONENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="INPUT-PARAM">
+        <!--Class: INPUT-PARAM-->
+        <!-- This class represents an input parameter of an DIAG-JOB. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="PHYSICAL-DEFAULT-VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DOP-BASE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+    </xsd:complexType>
+    <xsd:complexType name="INPUT-PARAMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="INPUT-PARAM" name="INPUT-PARAM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="INTERNAL-CONSTR">
+        <!--Class: INTERNAL-CONSTR-->
+        <!-- The validity of the internal value can be defined via the class INTERNAL-CONSTR. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="LIMIT" name="LOWER-LIMIT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="LIMIT" name="UPPER-LIMIT"/>
+            <xsd:element type="SCALE-CONSTRS" name="SCALE-CONSTRS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="INTERN-FLASHDATA">
+        <!--Class: INTERN-FLASHDATA-->
+        <!-- Discribes the posibility to store the Flashdata into the ECU-MEM file. -->
+        <xsd:complexContent>
+            <xsd:extension base="FLASHDATA">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="DATA"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="INTERVAL-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="OPEN"/>
+            <xsd:enumeration value="CLOSED"/>
+            <xsd:enumeration value="INFINITE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="LAYER-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="LAYER-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="LEADING-LENGTH-INFO-TYPE">
+        <!--Class: LEADING-LENGTH-INFO-TYPE-->
+        <!-- LEADING-LENGTH-INFO-TYPE: The length of the parameter is to be extracted from the PDU. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-CODED-TYPE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BIT-LENGTH"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="LENGTH-DESCRIPTOR">
+        <!--Class: LENGTH-DESCRIPTOR-->
+        <!--  -->
+    </xsd:complexType>
+    <xsd:complexType name="LENGTH-KEY">
+        <!--Class: LENGTH-KEY-->
+        <!--  -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:choice maxOccurs="1" minOccurs="1">
+                    <xsd:element name="DOP-REF" type="ODXLINK"/>
+                    <xsd:element name="DOP-SNREF" type="SNREF"/>
+                </xsd:choice>
+                <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="LIMIT">
+        <!--Class: LIMIT-->
+        <!-- Base class of the classes LOWER-LIMIT and UPPER-LIMIT. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute default="CLOSED" use="optional" type="INTERVAL-TYPE" name="INTERVAL-TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="LINK-COMPARAM-REF">
+        <!--Class: LINK-COMPARAM-REF-->
+        <!-- Refernz to a COM-PARAM. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="LINK-COMPARAM-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="LINK-COMPARAM-REF" name="LINK-COMPARAM-REF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="LOGICAL-LINK">
+        <!--Class: LOGICAL-LINK-->
+        <!-- The LogicalLink class represents a logical connection from a ODX layer to an ECU or to a group of ECUs. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="GATEWAY-LOGICAL-LINK-REFS" name="GATEWAY-LOGICAL-LINK-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="PHYSICAL-VEHICLE-LINK-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PROTOCOL-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="FUNCTIONAL-GROUP-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="BASE-VARIANT-REF" type="ODXLINK"/>
+            <xsd:element type="ECU-PROXY-REFS" name="ECU-PROXY-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="LINK-COMPARAM-REFS" name="LINK-COMPARAM-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="LOGICAL-LINK-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="LOGICAL-LINK-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="LOGICAL-LINKS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="LOGICAL-LINK" name="LOGICAL-LINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MATCHING-COMPONENT">
+        <!--Class: MATCHING-COMPONENT-->
+        <!-- Every INFOCOMPONENT may contain an arbitrary number of MATCHING-COMPONENTs. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="EXPECTED-VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="OUT-PARAM-IF-SNREF" type="SNREF"/>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" name="MULTIPLE-ECU-JOB-REF" type="ODXLINK"/>
+                <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-REF" type="ODXLINK"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MATCHING-COMPONENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="MATCHING-COMPONENT" name="MATCHING-COMPONENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MATCHING-PARAMETER">
+        <!--Class: MATCHING-PARAMETER-->
+        <!-- Response Parameter definition that is used for identification of ECU variants. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="EXPECTED-VALUE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-SNREF" type="SNREF"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="OUT-PARAM-IF-SNREF" type="SNREF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MATCHING-PARAMETERS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="MATCHING-PARAMETER" name="MATCHING-PARAMETER"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MATCHING-REQUEST-PARAM">
+        <!--Class: MATCHING-REQUEST-PARAM-->
+        <!-- The verification can also take place by matching the received value with a value in the request message using MATCHING-REQUEST-PARAM. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:int" name="REQUEST-BYTE-POS"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BYTE-LENGTH"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MEM">
+        <!--Class: MEM-->
+        <!-- This section keeps the information about the various programming sessions as well as the data and the structure of the data to be programmed into the target device. -->
+        <xsd:sequence>
+            <xsd:element type="SESSIONS" name="SESSIONS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="DATABLOCKS" name="DATABLOCKS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="FLASHDATAS" name="FLASHDATAS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MEMBER-LOGICAL-LINK">
+        <!--Class: MEMBER-LOGICAL-LINK-->
+        <!-- This class is a subclass of LOGICAL-LINK to identify a regular ECU that may be accessed either directly or through a gateway. -->
+        <xsd:complexContent>
+            <xsd:extension base="LOGICAL-LINK"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MIN-MAX-LENGTH-TYPE">
+        <!--Class: MIN-MAX-LENGTH-TYPE-->
+        <!-- Subclass of DIAG-CODED-TYPE, which defines a dynamic length of a value between MIN-LENGTH and MAX-LENGTH limited by TERMINATION. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-CODED-TYPE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="MAX-LENGTH"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="MIN-LENGTH"/>
+                </xsd:sequence>
+                <xsd:attribute use="required" type="TERMINATION" name="TERMINATION"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MODEL-YEAR">
+        <!--Class: MODEL-YEAR-->
+        <!-- MODEL-YEAR (e.g. 2003) -->
+        <xsd:complexContent>
+            <xsd:extension base="INFO-COMPONENT"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MODIFICATION">
+        <!--Class: MODIFICATION-->
+        <!-- This class represents a modification comment of the editor of a ODX database. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="CHANGE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="REASON"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MODIFICATIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="MODIFICATION" name="MODIFICATION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MULTIPLE-ECU-JOB">
+        <!--Class: MULTIPLE-ECU-JOB-->
+        <!-- In contrast to SINGLE-ECU-JOBS, the code of MULTIPLE-ECU-JOBs contains calls to services (and jobs) of more than one server. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="FUNCT-CLASS-REFS" name="FUNCT-CLASS-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="PROG-CODES" name="PROG-CODES" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="INPUT-PARAMS" name="INPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="OUTPUT-PARAMS" name="OUTPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="NEG-OUTPUT-PARAMS" name="NEG-OUTPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DIAG-LAYER-REFS" name="DIAG-LAYER-REFS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="AUDIENCE" name="AUDIENCE"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+        <xsd:attribute use="optional" type="xsd:unsignedInt" name="SECURITY-ACCESS-LEVEL"/>
+        <xsd:attribute default="true" use="optional" type="xsd:boolean" name="IS-EXECUTABLE"/>
+        <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-REDUCED-RESULT-ENABLED"/>
+    </xsd:complexType>
+    <xsd:complexType name="MULTIPLE-ECU-JOBS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="MULTIPLE-ECU-JOB" name="MULTIPLE-ECU-JOB"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MULTIPLE-ECU-JOB-SPEC">
+        <!--Class: MULTIPLE-ECU-JOB-SPEC-->
+        <!-- Wrapper class for MULTIPLE-ECU-JOBs. -->
+        <xsd:complexContent>
+            <xsd:extension base="ODX-CATEGORY">
+                <xsd:sequence>
+                    <xsd:element type="MULTIPLE-ECU-JOBS" name="MULTIPLE-ECU-JOBS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="DIAG-DATA-DICTIONARY-SPEC" name="DIAG-DATA-DICTIONARY-SPEC"/>
+                    <xsd:element type="FUNCT-CLASSS" name="FUNCT-CLASSS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MUX">
+        <!--Class: MUX-->
+        <!-- Complex DOP that allows switching of the interpretation of DOPs depending on the value of another DOP. -->
+        <xsd:complexContent>
+            <xsd:extension base="COMPLEX-DOP">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BYTE-POSITION"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="SWITCH-KEY" name="SWITCH-KEY"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="DEFAULT-CASE" name="DEFAULT-CASE"/>
+                    <xsd:element type="CASES" name="CASES" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-VISIBLE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MUXS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="MUX" name="MUX"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-OFFSET">
+        <!--Class: NEG-OFFSET-->
+        <!-- target address is lower than the source address. This means that the offset is negative, but in this is described a positive (hexadecimal) value. -->
+        <xsd:complexContent>
+            <xsd:extension base="TARGET-ADDR-OFFSET">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="NEGATIVE-OFFSET"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-OUTPUT-PARAM">
+        <!--Class: NEG-OUTPUT-PARAM-->
+        <!-- Represents a negative output parameter of a Job. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DOP-BASE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-OUTPUT-PARAMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="NEG-OUTPUT-PARAM" name="NEG-OUTPUT-PARAM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-RESPONSE">
+        <!--Class: NEG-RESPONSE-->
+        <!-- Negative response sent by an ECU, usually after a runtime system Request. -->
+        <xsd:complexContent>
+            <xsd:extension base="RESPONSE"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-RESPONSE-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="NEG-RESPONSE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NEG-RESPONSES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="NEG-RESPONSE" name="NEG-RESPONSE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NOT-INHERITED-DIAG-COMM">
+        <!--Class: NOT-INHERITED-DIAG-COMM-->
+        <!-- Allows to eliminate Diagnostic Services implemented on higher hierarchical levels corresponding to the inheritance model; refered via their SHORT-NAMEs ('name mapping'). -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-SNREF" type="SNREF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NOT-INHERITED-DIAG-COMMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="NOT-INHERITED-DIAG-COMM" name="NOT-INHERITED-DIAG-COMM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NOT-INHERITED-VARIABLE">
+        <!--Class: NOT-INHERITED-VARIABLE-->
+        <!-- Allows to eliminate Diagnostic Variables implemented on higher hierarchical levels corresponding to the inheritance model; refered via their SHORT-NAMEs ('name mapping'). -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-VARIABLE-SNREF" type="SNREF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="NOT-INHERITED-VARIABLES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="NOT-INHERITED-VARIABLE" name="NOT-INHERITED-VARIABLE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ODX">
+        <!--Class: ODX-->
+        <!-- This is a wrapper class for the whole ODX file. -->
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-LAYER-CONTAINER" name="DIAG-LAYER-CONTAINER"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="COMPARAM-SPEC" name="COMPARAM-SPEC"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="VEHICLE-INFO-SPEC" name="VEHICLE-INFO-SPEC"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="FLASH" name="FLASH"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="MULTIPLE-ECU-JOB-SPEC" name="MULTIPLE-ECU-JOB-SPEC"/>
+        </xsd:choice>
+        <xsd:attribute fixed="2.0.1" use="required" type="xsd:string" name="MODEL-VERSION"/>
+    </xsd:complexType>
+    <xsd:complexType name="ODX-CATEGORY">
+        <!--Class: ODX-CATEGORY-->
+        <!-- Represents the elements that are general for all odx files. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="COMPANY-DATAS" name="COMPANY-DATAS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="ODXLINK">
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="OEM">
+        <!--Class: OEM-->
+        <!-- OEM (e.g. Volkswagen) -->
+        <xsd:complexContent>
+            <xsd:extension base="INFO-COMPONENT"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="OUTPUT-PARAM">
+        <!--Class: OUTPUT-PARAM-->
+        <!-- This class represents an output parameter of an SINGLE-ECU-JOB. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DOP-BASE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+    </xsd:complexType>
+    <xsd:complexType name="OUTPUT-PARAMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="OUTPUT-PARAM" name="OUTPUT-PARAM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OWN-IDENT">
+        <!--Class: OWN-IDENT-->
+        <!-- List of all OWN-IDENT elements of the current datablock. After successful flashing, the ECU has to respond with the IDENT-VALUE of OWN-IDENT. This might be used to test, if it is neccessary to flash. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="IDENT-VALUE" name="IDENT-VALUE"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="OWN-IDENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="OWN-IDENT" name="OWN-IDENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PARAM">
+        <!--Class: PARAM-->
+        <!-- A response or a request consists of one or more parameters (PARAMs). There are nine types of parameters, of which PARAM is the base class. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+    </xsd:complexType>
+    <xsd:complexType name="PARAM-LENGTH-INFO-TYPE">
+        <!--Class: PARAM-LENGTH-INFO-TYPE-->
+        <!--  -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-CODED-TYPE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="LENGTH-KEY-REF" type="ODXLINK"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PARAMS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PARAM" name="PARAM"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PARENT-REF">
+        <!--Class: PARENT-REF-->
+        <!-- Reverence to a Parent, which must be a DIAG-LAYER. -->
+        <xsd:sequence>
+            <xsd:element type="NOT-INHERITED-DIAG-COMMS" name="NOT-INHERITED-DIAG-COMMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="NOT-INHERITED-VARIABLES" name="NOT-INHERITED-VARIABLES" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="PARENT-REFS">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PARENT-REF" name="PARENT-REF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PHYS-CONST">
+        <!--Class: PHYS-CONST-->
+        <!-- PHYS-CONST is an alternative for CODED-CONST with the difference that the value is given in the physical representation. In a request it must be converted into the coded value using the referenced simple DOP. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="PHYS-CONSTANT-VALUE"/>
+                    <xsd:choice maxOccurs="1" minOccurs="1">
+                        <xsd:element name="DOP-REF" type="ODXLINK"/>
+                        <xsd:element name="DOP-SNREF" type="SNREF"/>
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="PHYSICAL-DATA-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A_INT32"/>
+            <xsd:enumeration value="A_UINT32"/>
+            <xsd:enumeration value="A_FLOAT32"/>
+            <xsd:enumeration value="A_FLOAT64"/>
+            <xsd:enumeration value="A_UNICODE2STRING"/>
+            <xsd:enumeration value="A_BYTEFIELD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PHYSICAL-DIMENSION">
+        <!--Class: PHYSICAL-DIMENSION-->
+        <!-- This class represents the physical dimension of a Unit. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="LENGTH-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="MASS-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="TIME-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="CURRENT-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="TEMPERATURE-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="MOLAR-AMOUNT-EXP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:int" name="LUMINOUS-INTENSITY-EXP"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="PHYSICAL-DIMENSIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PHYSICAL-DIMENSION" name="PHYSICAL-DIMENSION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="PHYSICAL-LINK-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ISO_11898_2_DWCAN"/>
+            <xsd:enumeration value="ISO_11898_3_DWFTCAN"/>
+            <xsd:enumeration value="ISO_11992_1_DWCAN"/>
+            <xsd:enumeration value="ISO_9141_2_UART"/>
+            <xsd:enumeration value="ISO_14230_1_UART"/>
+            <xsd:enumeration value="ISO_11898_RAW"/>
+            <xsd:enumeration value="SAE_J1850_VPW"/>
+            <xsd:enumeration value="SAE_J1850_PWM"/>
+            <xsd:enumeration value="SAE_J2610_UART"/>
+            <xsd:enumeration value="SAE_J1708_UART"/>
+            <xsd:enumeration value="SAE_J1939_11_DWCAN"/>
+            <xsd:enumeration value="GMW_3089_SWCAN"/>
+            <xsd:enumeration value="XDE_5024_UART"/>
+            <xsd:enumeration value="CCD_UART"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PHYSICAL-TYPE">
+        <!--Class: PHYSICAL-TYPE-->
+        <!-- Description of the physical representation of a DataObjectProperty (DOP). -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="PRECISION"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="PHYSICAL-DATA-TYPE" name="BASE-DATA-TYPE"/>
+        <xsd:attribute use="optional" type="RADIX" name="DISPLAY-RADIX"/>
+    </xsd:complexType>
+    <xsd:complexType name="PHYSICAL-VEHICLE-LINK">
+        <!--Class: PHYSICAL-VEHICLE-LINK-->
+        <!-- The class PHYSICAL-VEHICLE-LINK is used to physically address the ECU -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="VEHICLE-CONNECTOR-PIN-REFS" name="VEHICLE-CONNECTOR-PIN-REFS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="LINK-COMPARAM-REFS" name="LINK-COMPARAM-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="required" type="PHYSICAL-LINK-TYPE" name="TYPE"/>
+    </xsd:complexType>
+    <xsd:complexType name="PHYSICAL-VEHICLE-LINKS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PHYSICAL-VEHICLE-LINK" name="PHYSICAL-VEHICLE-LINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PHYS-MEM">
+        <!--Class: PHYS-MEM-->
+        <!-- Description of the physical memory layout of one ECU or one ECU variant. This may be required by the flash job. If DATABLOCKs / SEGMENTs do not exactly fit to the physical segments of the Flash (PHYS-SEGMENT). -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="PHYS-SEGMENTS" name="PHYS-SEGMENTS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="PHYS-SEGMENT">
+        <!--Class: PHYS-SEGMENT-->
+        <!-- The segment of the physical memory layout. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:hexBinary" name="FILLBYTE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BLOCK-SIZE"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="START-ADDRESS"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="PHYS-SEGMENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PHYS-SEGMENT" name="PHYS-SEGMENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="PIN-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HI"/>
+            <xsd:enumeration value="LOW"/>
+            <xsd:enumeration value="K"/>
+            <xsd:enumeration value="L"/>
+            <xsd:enumeration value="TX"/>
+            <xsd:enumeration value="RX"/>
+            <xsd:enumeration value="PLUS"/>
+            <xsd:enumeration value="MINUS"/>
+            <xsd:enumeration value="SINGLE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="POSITIONABLE-PARAM">
+        <!--Class: POSITIONABLE-PARAM-->
+        <!-- As already mentioned a response or a request consists of one or more parameters (PARAMs). There are nine types of parameters, of which PARAM is the base class. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BYTE-POSITION"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BIT-POSITION"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="POS-OFFSET">
+        <!--Class: POS-OFFSET-->
+        <!-- target address is higher than the source address by this (positive) offset -->
+        <xsd:complexContent>
+            <xsd:extension base="TARGET-ADDR-OFFSET">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="POSITIVE-OFFSET"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="POS-RESPONSE">
+        <!--Class: POS-RESPONSE-->
+        <!-- Positive response sent by an ECU, usually after a runtime system Request. -->
+        <xsd:complexContent>
+            <xsd:extension base="RESPONSE"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="POS-RESPONSE-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="POS-RESPONSE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="POS-RESPONSES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="POS-RESPONSE" name="POS-RESPONSE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROG-CODE">
+        <!--Class: PROG-CODE-->
+        <!-- The PROG-CODE class contains all data needed to reference a specific piece of code that is to be executed as the job. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="CODE-FILE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ENCRYPTION"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="SYNTAX"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="REVISION"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ENTRYPOINT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROG-CODES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PROG-CODE" name="PROG-CODE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROJECT-IDENT">
+        <!--Class: PROJECT-IDENT-->
+        <!-- the PROJECT-IDENT is an description for the  software, hardeware and other IDs.
+e.g. part numbers, serial numbers, ... -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="NAME"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="VALUE"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="PROJ-IDENT-TYPE" name="TYPE"/>
+    </xsd:complexType>
+    <xsd:complexType name="PROJECT-IDENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PROJECT-IDENT" name="PROJECT-IDENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROJECT-INFO">
+        <!--Class: PROJECT-INFO-->
+        <!-- A PROJECT-INFO object can be used to specify identification for soft- and hardware or other identifications like part numbers, serial numbers etc. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ECU-FAMILY-DESC"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="MODIFICATION-LETTER"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="COMPANY-DATA-REF" type="ODXLINK"/>
+            <xsd:element type="PROJECT-IDENTS" name="PROJECT-IDENTS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROJECT-INFOS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PROJECT-INFO" name="PROJECT-INFO"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="PROJ-IDENT-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DOC"/>
+            <xsd:enumeration value="PART-NO"/>
+            <xsd:enumeration value="TOOL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="PROTOCOL">
+        <!--Class: PROTOCOL-->
+        <!-- This is a wrapper class for all data of a Protocol. -->
+        <xsd:complexContent>
+            <xsd:extension base="HIERARCHY-ELEMENT">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="COMPARAM-SPEC-REF" type="ODXLINK"/>
+                    <xsd:element type="ACCESS-LEVELS" name="ACCESS-LEVELS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="AUT-METHODS" name="AUT-METHODS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="PARENT-REFS" name="PARENT-REFS"/>
+                </xsd:sequence>
+                <xsd:attribute use="required" type="xsd:string" name="TYPE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PROTOCOL-REF">
+        <!--Class: PROTOCOL-REF-->
+        <!-- This is a reference to Protocol class. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARENT-REF"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PROTOCOLS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="PROTOCOL" name="PROTOCOL"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PROTOCOL-SNREFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="PROTOCOL-SNREF" type="SNREF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="RADIX">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="HEX"/>
+            <xsd:enumeration value="DEC"/>
+            <xsd:enumeration value="BIN"/>
+            <xsd:enumeration value="OCT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="RELATED-DIAG-COMM-REF">
+        <!--Class: RELATED-DIAG-COMM-REF-->
+        <!--  -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="RELATION-TYPE"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="ODXLINK-ATTR"/>
+    </xsd:complexType>
+    <xsd:complexType name="RELATED-DIAG-COMM-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="RELATED-DIAG-COMM-REF" name="RELATED-DIAG-COMM-REF"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RELATED-DOC">
+        <!--Class: RELATED-DOC-->
+        <!-- RELATED-DOC objects are used for cross referencing additional documents. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="XDOC" name="XDOC"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RELATED-DOCS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="RELATED-DOC" name="RELATED-DOC"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="REQUEST">
+        <!--Class: REQUEST-->
+        <!-- Request of a runtime system to one ore more ECUs. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="PARAMS" name="PARAMS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="REQUESTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="REQUEST" name="REQUEST"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RESERVED">
+        <!--Class: RESERVED-->
+        <!-- A parameter of type RESERVED is used when the parameter should be ignored by the runtime system. Such
+parameters are not interpreted and are not shown on the user's display. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BIT-LENGTH"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="CODED-VALUE"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="DIAG-CODED-TYPE" name="DIAG-CODED-TYPE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="RESPONSE">
+        <!--Class: RESPONSE-->
+        <!-- Response sent by an ECU, usually after a runtime system Request; -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="PARAMS" name="PARAMS" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="ROLES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" type="xsd:string" name="ROLE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="ROW-FRAGMENT">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="KEY"/>
+            <xsd:enumeration value="STRUCT"/>
+            <xsd:enumeration value="KEY-AND-STRUCT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="SCALE-CONSTR">
+        <!--Class: SCALE-CONSTR-->
+        <!-- SCALE-CONSTRS can be used to define valid, non-valid, non-defined or non-available intervals. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="TEXT" name="SHORT-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="LIMIT" name="LOWER-LIMIT"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="LIMIT" name="UPPER-LIMIT"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="VALID-TYPE" name="VALIDITY"/>
+    </xsd:complexType>
+    <xsd:complexType name="SCALE-CONSTRS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SCALE-CONSTR" name="SCALE-CONSTR"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SD">
+        <!--Class: SD-->
+        <!-- The SD class contains a special data. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="optional" type="xsd:string" name="SI"/>
+                <xsd:attribute use="optional" type="xsd:string" name="TI"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="SDG">
+        <!--Class: SDG-->
+        <!-- Special data groups (SDGS) are used to store OEM-specific data not covered by the ODX data model in a structured form. -->
+        <xsd:complexContent>
+            <xsd:extension base="SPECIAL-DATA">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="SDG-CAPTION" name="SDG-CAPTION"/>
+                    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+                        <xsd:element maxOccurs="1" minOccurs="1" type="SDG" name="SDG"/>
+                        <xsd:element maxOccurs="1" minOccurs="1" type="SD" name="SD"/>
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SDG-CAPTION">
+        <!--Class: SDG-CAPTION-->
+        <!-- An SDG contains an optional CAPTION to describe the SDG's content, and a list of SDGs and SD objects that contain the special data. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="SDGS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SDG" name="SDG"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SECURITY">
+        <!--Class: SECURITY-->
+        <!-- specific security method or reference at external program which decides by usage of ADMIN-DATA the current user skill. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="SECURITY-METHOD" name="SECURITY-METHOD"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="FW-SIGNATURE" name="FW-SIGNATURE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="FW-CHECKSUM" name="FW-CHECKSUM"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="VALIDITY-FOR" name="VALIDITY-FOR"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SECURITY-METHOD">
+        <!--Class: SECURITY-METHOD-->
+        <!-- The SECURITY-METHOD could describe e.g. a whole method, a single information about used method or a reference to external access tables. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="SESSION-SUB-ELEM-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="SECURITYS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SECURITY" name="SECURITY"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SEGMENT">
+        <!--Class: SEGMENT-->
+        <!-- The logical SEGMENT consists of a continous data stream with a SOURCE-START-ADDR and a SOURCE-END-ADDR respectively UNCOMPRESSED-SIZE. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:hexBinary" name="SOURCE-START-ADDRESS"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="COMPRESSED-SIZE"/>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" type="UNCOMPRESSED-SIZE" name="UNCOMPRESSED-SIZE"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="SOURCE-END-ADDRESS" name="SOURCE-END-ADDRESS"/>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="SEGMENTS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SEGMENT" name="SEGMENT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SELECTION-TABLE-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:choice maxOccurs="unbounded" minOccurs="1">
+            <xsd:element name="SELECTION-TABLE-REF" type="ODXLINK"/>
+            <xsd:element name="SELECTION-TABLE-SNREF" type="SNREF"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="SESSION">
+        <!--Class: SESSION-->
+        <!-- The SESSION describes which DATABLOCKS are flashed. All described DATABLOCKS in this SESSION have to be processed. The SESSION is the only item which can be selected from the flash tool. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="EXPECTED-IDENTS" name="EXPECTED-IDENTS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="CHECKSUMS" name="CHECKSUMS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SECURITYS" name="SECURITYS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="DATABLOCK-REFS" name="DATABLOCK-REFS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="SESSION-DESC">
+        <!--Class: SESSION-DESC-->
+        <!-- SESSION-DESCs are used to store information about sessions and jobs used for download or upload. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="PARTNUMBER"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="PRIORITY"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="SESSION-SNREF" type="SNREF"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-SNREF" type="SNREF"/>
+            <xsd:element type="FLASH-CLASS-REFS" name="FLASH-CLASS-REFS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="SDGS" name="SDGS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="required" type="DIRECTION" name="DIRECTION"/>
+    </xsd:complexType>
+    <xsd:complexType name="SESSION-DESCS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SESSION-DESC" name="SESSION-DESC"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SESSIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SESSION" name="SESSION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="SESSION-SUB-ELEM-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A_UINT32"/>
+            <xsd:enumeration value="A_BYTEFIELD"/>
+            <xsd:enumeration value="A_ASCIISTRING"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="SINGLE-ECU-JOB">
+        <!--Class: SINGLE-ECU-JOB-->
+        <!-- A SINGLE-ECU-JOB is derived from DIAG-JOB, which again is a DIAG-COMM. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-COMM">
+                <xsd:sequence>
+                    <xsd:element type="PROG-CODES" name="PROG-CODES" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element type="INPUT-PARAMS" name="INPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="OUTPUT-PARAMS" name="OUTPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="NEG-OUTPUT-PARAMS" name="NEG-OUTPUT-PARAMS" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-REDUCED-RESULT-ENABLED"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SIZEDEF-FILTER">
+        <!--Class: SIZEDEF-FILTER-->
+        <!-- Definition of the Filter-Size. -->
+        <xsd:complexContent>
+            <xsd:extension base="FILTER">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="FILTER-SIZE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SIZEDEF-PHYS-SEGMENT">
+        <!--Class: SIZEDEF-PHYS-SEGMENT-->
+        <!-- Size definition of the physical segment. -->
+        <xsd:complexContent>
+            <xsd:extension base="PHYS-SEGMENT">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="SIZE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SNREF">
+        <xsd:attribute use="required" type="xsd:string" name="SHORT-NAME"/>
+    </xsd:complexType>
+    <xsd:complexType name="SOURCE-END-ADDRESS">
+        <!--Class: SOURCE-END-ADDRESS-->
+        <!-- The end of the address range (in target device). This is the last address to be programmed or to be included in checksum calculation. Attribut DATATYPE: Attribute for datatype address. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:hexBinary"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="SPECIAL-DATA">
+        <!--Class: SPECIAL-DATA-->
+        <!-- Wrapper class of the SDG and SD. -->
+    </xsd:complexType>
+    <xsd:simpleType name="STANDARDISATION-LEVEL">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="STANDARD"/>
+            <xsd:enumeration value="OEM-SPECIFIC"/>
+            <xsd:enumeration value="OPTIONAL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="STANDARD-LENGTH-TYPE">
+        <!--Class: STANDARD-LENGTH-TYPE-->
+        <!-- This class defines the length of the internal value. -->
+        <xsd:complexContent>
+            <xsd:extension base="DIAG-CODED-TYPE">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BIT-LENGTH"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:hexBinary" name="BIT-MASK"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="STATIC-FIELD">
+        <!--Class: STATIC-FIELD-->
+        <!-- Repetition of another Complex-DOP with a fixed number of repetitions. -->
+        <xsd:complexContent>
+            <xsd:extension base="FIELD">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="FIXED-NUMBER-OF-ITEMS"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="ITEM-BYTE-SIZE"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="STATIC-FIELDS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="STATIC-FIELD" name="STATIC-FIELD"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="STRUCTURE">
+        <!--Class: STRUCTURE-->
+        <!-- Combination of some parameter to allow easy access via one reference -->
+        <xsd:complexContent>
+            <xsd:extension base="BASIC-STRUCTURE">
+                <xsd:attribute default="false" use="optional" type="xsd:boolean" name="IS-VISIBLE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="STRUCTURES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="STRUCTURE" name="STRUCTURE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SUPPORTED-DYN-ID">
+        <!--Class: SUPPORTED-DYN-ID-->
+        <!-- The class SUPPORTED-DDLID represents the DDLID, that are supported by an ECU. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:hexBinary"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="SUPPORTED-DYN-IDS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SUPPORTED-DYN-ID" name="SUPPORTED-DYN-ID"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SWITCH-KEY">
+        <!--Class: SWITCH-KEY-->
+        <!-- Definition of a data item that is used to switch between the different cases of a DOP of type Mux -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="BYTE-POSITION"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:unsignedInt" name="BIT-POSITION"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DATA-OBJECT-PROP-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SW-VARIABLE">
+        <!--Class: SW-VARIABLE-->
+        <!-- The class SW-VARIABLE describes a SW-variable that is available as a DIAG-VARIABLE. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ORIGIN"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="SW-VARIABLES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="SW-VARIABLE" name="SW-VARIABLE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SYSTEM">
+        <!--Class: SYSTEM-->
+        <!-- Represents a System parameter. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:choice maxOccurs="1" minOccurs="1">
+                    <xsd:element name="DOP-REF" type="ODXLINK"/>
+                    <xsd:element name="DOP-SNREF" type="SNREF"/>
+                </xsd:choice>
+                <xsd:attribute use="required" type="xsd:string" name="SYSPARAM"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="TABLE">
+        <!--Class: TABLE-->
+        <!-- The usage of TABLE is similar to the DOP structure and is placed as a substructure of DIAGDATADICTIONARY. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="KEY-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="STRUCT-LABEL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="KEY-DOP-REF" type="ODXLINK"/>
+            <xsd:group maxOccurs="unbounded" minOccurs="1" ref="ROW-WRAPPER"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="SEMANTIC"/>
+    </xsd:complexType>
+    <xsd:complexType name="TABLE-ENTRY">
+        <!--Class: TABLE-ENTRY-->
+        <!-- This parameter type should be used for grouping of TABLE-ROWs (see static DPID example) that is multiple-stage structuring of data. -->
+        <xsd:complexContent>
+            <xsd:extension base="PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" type="ROW-FRAGMENT" name="TARGET"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="TABLE-ROW-REF" type="ODXLINK"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="TABLE-KEY">
+        <!--Class: TABLE-KEY-->
+        <!-- A parameter of type TABLE-KEY is the part of the PDU where the KEY (data identifier) has to be red in the case of response or written in the case of request. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:choice>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="TABLE-REF" type="ODXLINK"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="TABLE-ROW-REF" type="ODXLINK"/>
+                </xsd:choice>
+                <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="TABLE-ROW">
+        <!--Class: TABLE-ROW-->
+        <!-- A TABLE-ROW associates a data identifier called KEY with a parameter definition via reference on a STRUCTURE. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="KEY"/>
+            <xsd:element maxOccurs="1" minOccurs="1" name="STRUCTURE-REF" type="ODXLINK"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="TABLES">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="TABLE" name="TABLE"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TABLE-STRUCT">
+        <!--Class: TABLE-STRUCT-->
+        <!-- This parameter type defines the position of the data to be extracted by using the TABLEROW-referenced STRUCTURE. The corresponding TABLE-KEY-parameter is referenced by an odxlink. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="TABLE-KEY-REF" type="ODXLINK"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="TARGET-ADDR-OFFSET">
+        <!--Class: TARGET-ADDR-OFFSET-->
+        <!-- Difference between source address and target address (ECU address) -->
+    </xsd:complexType>
+    <xsd:complexType name="TEAM-MEMBER">
+        <!--Class: TEAM-MEMBER-->
+        <!-- This class represents a team member of a company. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="ROLES" name="ROLES" minOccurs="0" maxOccurs="1"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="DEPARTMENT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ADDRESS"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="ZIP"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="CITY"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="PHONE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="FAX"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="EMAIL"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="TEAM-MEMBERS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="TEAM-MEMBER" name="TEAM-MEMBER"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="TERMINATION">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="END-OF-PDU"/>
+            <xsd:enumeration value="ZERO"/>
+            <xsd:enumeration value="HEX-FF"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="TEXT">
+        <!--Class: TEXT-->
+        <!-- This class gives the user the possibility to describe a text . -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="optional" type="xsd:string" name="TI"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="UNCOMPRESSED-SIZE">
+        <!--Class: UNCOMPRESSED-SIZE-->
+        <!-- Uncompressed size of the SEGMENT/CHECKSUM. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:unsignedInt"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="UNION-VALUE">
+        <!--Class: UNION-VALUE-->
+        <!-- Wrapper class for class V and class VT to provide homogenize linking mechanism. -->
+    </xsd:complexType>
+    <xsd:complexType name="UNIT">
+        <!--Class: UNIT-->
+        <!-- The class UNIT is used to offer additional visualisation information for the physical values. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="DISPLAY-NAME"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:double" name="FACTOR-SI-TO-UNIT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:double" name="OFFSET-SI-TO-UNIT"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PHYSICAL-DIMENSION-REF" type="ODXLINK"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="UNIT-GROUP">
+        <!--Class: UNIT-GROUP-->
+        <!-- Allows organisation of units regarding to the authors demands by entering groups of units. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="UNIT-GROUP-CATEGORY" name="CATEGORY"/>
+            <xsd:element type="UNIT-REFS" name="UNIT-REFS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:simpleType name="UNIT-GROUP-CATEGORY">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="COUNTRY"/>
+            <xsd:enumeration value="EQUIV-UNITS"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="UNIT-GROUPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="UNIT-GROUP" name="UNIT-GROUP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="UNIT-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="UNIT-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="UNITS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="UNIT" name="UNIT"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="UNIT-SPEC">
+        <!--Class: UNIT-SPEC-->
+        <!-- UNIT-SPEC is a wrapper class of all defined units in one layer. -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" type="ADMIN-DATA" name="ADMIN-DATA"/>
+            <xsd:element type="UNIT-GROUPS" name="UNIT-GROUPS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="UNITS" name="UNITS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="PHYSICAL-DIMENSIONS" name="PHYSICAL-DIMENSIONS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="V">
+        <!--Class: V-->
+        <!-- Definition of a numerical value. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:double"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="VALIDITY-FOR">
+        <!--Class: VALIDITY-FOR-->
+        <!-- VALIDITY-FOR describes, which ECU belongs to the given signature. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="required" type="SESSION-SUB-ELEM-TYPE" name="TYPE"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="VALID-TYPE">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="VALID"/>
+            <xsd:enumeration value="NOT-VALID"/>
+            <xsd:enumeration value="NOT-DEFINED"/>
+            <xsd:enumeration value="NOT-AVAILABLE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="VALUE">
+        <!--Class: VALUE-->
+        <!-- A VALUE parameter is the most frequently used parameter type. It references a complex or a simple DOP, which convert a concret value from coded into physical representation and vise versa. -->
+        <xsd:complexContent>
+            <xsd:extension base="POSITIONABLE-PARAM">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="PHYSICAL-DEFAULT-VALUE"/>
+                    <xsd:choice maxOccurs="1" minOccurs="1">
+                        <xsd:element name="DOP-REF" type="ODXLINK"/>
+                        <xsd:element name="DOP-SNREF" type="SNREF"/>
+                    </xsd:choice>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="VARIABLE-GROUP">
+        <!--Class: VARIABLE-GROUP-->
+        <!-- Allows organisation of DIAG-VARIABLEs regarding to the authors demands by entering groups of variables. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="VARIABLE-GROUPS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="VARIABLE-GROUP" name="VARIABLE-GROUP"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-CONNECTOR">
+        <!--Class: VEHICLE-CONNECTOR-->
+        <!-- The VehicleConnector is used to describe the electric diagnostic connections of a vehicle.. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="VEHICLE-CONNECTOR-PINS" name="VEHICLE-CONNECTOR-PINS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-CONNECTOR-PIN">
+        <!--Class: VEHICLE-CONNECTOR-PIN-->
+        <!-- The PINs of the connector which is used for the PhysicalVehicleLink. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:unsignedInt" name="PIN_NUMBER"/>
+        </xsd:sequence>
+        <xsd:attribute use="required" type="xsd:ID" name="ID"/>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+        <xsd:attribute use="required" type="PIN-TYPE" name="TYPE"/>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-CONNECTOR-PIN-REFS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="2" minOccurs="1" name="VEHICLE-CONNECTOR-PIN-REF" type="ODXLINK"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-CONNECTOR-PINS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="VEHICLE-CONNECTOR-PIN" name="VEHICLE-CONNECTOR-PIN"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-CONNECTORS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="VEHICLE-CONNECTOR" name="VEHICLE-CONNECTOR"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-INFORMATION">
+        <!--Class: VEHICLE-INFORMATION-->
+        <!-- The class VehicleInformation consists of the basic information to get a diagnostic system connected to a car. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element type="INFO-COMPONENT-REFS" name="INFO-COMPONENT-REFS" minOccurs="1" maxOccurs="1"/>
+            <xsd:element type="VEHICLE-CONNECTORS" name="VEHICLE-CONNECTORS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="LOGICAL-LINKS" name="LOGICAL-LINKS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="ECU-GROUPS" name="ECU-GROUPS" minOccurs="0" maxOccurs="1"/>
+            <xsd:element type="PHYSICAL-VEHICLE-LINKS" name="PHYSICAL-VEHICLE-LINKS" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute use="optional" type="xsd:string" name="OID"/>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-INFORMATIONS">
+        <!-- Automatically generated wrapper element type -->
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" type="VEHICLE-INFORMATION" name="VEHICLE-INFORMATION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-INFO-SPEC">
+        <!--Class: VEHICLE-INFO-SPEC-->
+        <!-- VEHICLE-INFO-SPEC is a wrapper class of all defined vehicle information. -->
+        <xsd:complexContent>
+            <xsd:extension base="ODX-CATEGORY">
+                <xsd:sequence>
+                    <xsd:element type="INFO-COMPONENTS" name="INFO-COMPONENTS" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element type="VEHICLE-INFORMATIONS" name="VEHICLE-INFORMATIONS" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-MODEL">
+        <!--Class: VEHICLE-MODEL-->
+        <!-- VEHICLE-MODEL (e.g. Golf V) -->
+        <xsd:complexContent>
+            <xsd:extension base="INFO-COMPONENT"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="VEHICLE-TYPE">
+        <!--Class: VEHICLE-TYPE-->
+        <!-- VEHICLETYPE (e.g. passenger car) -->
+        <xsd:complexContent>
+            <xsd:extension base="INFO-COMPONENT"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="VT">
+        <!--Class: VT-->
+        <!-- Definition of a textual value. -->
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute use="optional" type="xsd:string" name="TI"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="XDOC">
+        <!--Class: XDOC-->
+        <!-- XDOC specifies the reference do the additional document. -->
+        <xsd:sequence>
+            <xsd:group ref="ELEMENT-ID"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="NUMBER"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="STATE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:dateTime" name="DATE"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="PUBLISHER"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="URL"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="xsd:string" name="POSITION"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="DIAG-COMM-PROXY">
+        <xsd:choice>
+            <xsd:choice>
+                <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-SERVICE" name="DIAG-SERVICE"/>
+                <xsd:element maxOccurs="1" minOccurs="1" type="SINGLE-ECU-JOB" name="SINGLE-ECU-JOB"/>
+            </xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-COMM-REF" type="ODXLINK"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="DIAG-VARIABLE-PROXY">
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DIAG-VARIABLE-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="DIAG-VARIABLE" name="DIAG-VARIABLE"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="DTC-PROXY">
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" name="DTC-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="DTC" name="DTC"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="ELEMENT-ID">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="1" type="xsd:string" name="SHORT-NAME"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="TEXT" name="LONG-NAME"/>
+            <xsd:element maxOccurs="1" minOccurs="0" type="DESCRIPTION" name="DESC"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="ENV-DATA-PROXY">
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" name="ENV-DATA-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="ENV-DATA" name="ENV-DATA"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="ROW-WRAPPER">
+        <xsd:choice>
+            <xsd:element maxOccurs="1" minOccurs="1" name="TABLE-ROW-REF" type="ODXLINK"/>
+            <xsd:element maxOccurs="1" minOccurs="1" type="TABLE-ROW" name="TABLE-ROW"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:attributeGroup name="ODXLINK-ATTR">
+        <xsd:attribute use="required" type="xsd:string" name="ID-REF"/>
+        <xsd:attribute use="optional" type="xsd:string" name="DOCREF"/>
+        <xsd:attribute use="optional" type="DOCTYPE" name="DOCTYPE"/>
+        <xsd:attribute use="optional" type="xsd:string" name="REVISION"/>
+    </xsd:attributeGroup>
+    <xsd:element type="ODX" name="ODX"/>
+</xsd:schema>

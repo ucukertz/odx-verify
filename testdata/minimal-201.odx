@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ODX MODEL-VERSION="2.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="odx.xsd">
+  <DIAG-LAYER-CONTAINER ID="DLCTest">
+    <SHORT-NAME>TestDL</SHORT-NAME>
+    <ECU-VARIANTS>
+      <ECU-VARIANT ID="ECU_Test">
+        <SHORT-NAME>TestECU</SHORT-NAME>
+        <DIAG-DATA-DICTIONARY-SPEC>
+          <DTC-DOPS>
+            <DTC-DOP ID="DTC_DOP_1">
+              <SHORT-NAME>TestDtcDop</SHORT-NAME>
+              <DIAG-CODED-TYPE BASE-DATA-TYPE="A_UINT32" xsi:type="STANDARD-LENGTH-TYPE">
+                <BIT-LENGTH>24</BIT-LENGTH>
+              </DIAG-CODED-TYPE>
+              <PHYSICAL-TYPE BASE-DATA-TYPE="A_UINT32"/>
+              <COMPU-METHOD>
+                <CATEGORY>IDENTICAL</CATEGORY>
+              </COMPU-METHOD>
+              <DTCS>
+                <DTC ID="DTC_01">
+                  <SHORT-NAME>DTC_P0100</SHORT-NAME>
+                  <TROUBLE-CODE>65696</TROUBLE-CODE>
+                  <TEXT>Mass Air Flow Sensor Fault</TEXT>
+                </DTC>
+              </DTCS>
+            </DTC-DOP>
+          </DTC-DOPS>
+        </DIAG-DATA-DICTIONARY-SPEC>
+      </ECU-VARIANT>
+    </ECU-VARIANTS>
+  </DIAG-LAYER-CONTAINER>
+</ODX>
